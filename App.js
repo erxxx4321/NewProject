@@ -1,20 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import TodoList from './components/TodoList';
+import { Button } from '@rneui/themed';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import AddScreen from './components/AddScreen';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+function HomeScreen({ navigation }) {
+	const navigateToAddScreen = () => navigation.navigate('AddScreen');
+
+	return (
+		<View style={{ flex: 1, flexDirection: 'column' }}>
+			<View style={{ alignItems: 'flex-end' }}>
+				<Button type="outline" onPress={navigateToAddScreen}>
+					<Icon name="plus" />
+				</Button>
+			</View>
+			<View style={{}}>
+				<TodoList></TodoList>
+			</View>
+		</View>
+	);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Stack = createNativeStackNavigator();
+
+function App() {
+	return (
+		<NavigationContainer>
+			<Stack.Navigator>
+				<Stack.Screen
+					name="Todos"
+					component={HomeScreen}
+					options={{
+						title: 'Todos',
+					}}
+				/>
+				<Stack.Screen name="AddScreen" component={AddScreen} options={{ title: '新增Todo' }} />
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
+}
+
+export default App;
