@@ -16,5 +16,4 @@ export function addTodo(newTodo) {
 export function updatedTodo(id) {
 	let updatedTodos = todos.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo));
 	todos = updatedTodos;
-	console.log(todos);
 }

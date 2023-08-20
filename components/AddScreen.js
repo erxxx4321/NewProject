@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 function AddScreen({ navigation }) {
 	const [formData, setFormData] = useState({
 		id: 0,
-		content: '',
+		text: '',
 		completed: false,
 	});
 
@@ -21,14 +21,14 @@ function AddScreen({ navigation }) {
 		addTodo(formData);
 		setFormData({
 			id: 0,
-			content: '',
+			text: '',
 			completed: false,
 		});
 	};
 
 	return (
 		<View style={{ paddingLeft: 15, paddingRight: 15 }}>
-			<Input placeholder="項目" value={formData.content} onChangeText={(value) => handleInputChange('content', value)} />
+			<Input placeholder="項目" value={formData.text} onChangeText={(value) => handleInputChange('text', value)} />
 			<Button title="加入" size="md" onPress={handleSubmit} />
 		</View>
 	);
